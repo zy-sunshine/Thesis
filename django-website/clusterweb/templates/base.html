@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=GBK" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<title>{{ SITE_CONFIG.title }} - {% block sub_title %}{% endblock %}</title>
+
+	{% block extra_head_meta %}
+	{% endblock %}
+
+	<link href="{{ MEDIA_URL }}css/base.css" rel="stylesheet" type="text/css" media="screen" />
+	<link rel="shortcut icon" type="image/ico" href="{{ MEDIA_URL }}images/favicon.ico" />
+
+	{% block extra_head_css %}
+	{% endblock %}
+	
+	{% block extra_head_script %} 
+	{% endblock %}
+
+</head>
+<body>    
+    {% block header %}
+    <div id="logo">
+		<a href="{{ SITE_CONFIG.index_url }}">{{ SITE_CONFIG.logo_text }}</a>
+	</div>
+	<!-- end #logo -->
+	{% endblock %}
+	
+<div id="wrapper">
+	<hr />
+	{% block content %}
+	{% endblock %}
+</div><!-- wrapper --!>
+	
+{% block footer %}
+<div id="footer">
+	<p>Copyright (c) 2010 {{ SITE_CONFIG.title }} All rights reserved.
+    Design by <a href="{{ SITE_CONFIG.author_site }}" target="_blank">{{ SITE_CONFIG.author_name }}</a>.</p>
+</div>
+<!-- end #footer -->
+{% endblock %}
+
+
+{% block bottom_script %}
+{% endblock %}
+	
+</body>
+</html>

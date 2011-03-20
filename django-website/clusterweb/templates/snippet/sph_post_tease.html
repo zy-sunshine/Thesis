@@ -1,0 +1,19 @@
+<!-- Error --!>
+{% if error %}
+    <p>Query Faield: {{ error }}</p>
+{% endif %}
+
+<!-- Matches --!>
+<button id="sph_ret_btn">Toggle</button>
+<div id="sph_ret_cnt" style="display:none">
+{% if res.matches %}
+    Matches:<br>
+	{% for match in res.matches %}
+        {{ match.id }}. docid={{ match.docid }}, weight={{ match.weight }},
+        {% for attr in match.attrs %}
+            {{ attr.name }}={{ attr.value }}
+        {% endfor %}
+    <br>
+	{% endfor %}
+{% endif %}
+</div>

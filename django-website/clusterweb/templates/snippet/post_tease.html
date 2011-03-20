@@ -1,0 +1,38 @@
+<!-- Pagination --!>
+{% for page in pages %}
+    {% ifequal page.num page_cur.num %}
+        <span class="pl_c">{{ page.num }}</span>
+    {% else %}
+        <a href="/?{{ page_para }}&start={{ page.start }}" class="pl">{{ page.num }}</a>
+    {% endifequal %}
+{% endfor %}
+
+<!-- Posts --!>
+{% if posts %}
+    <p>Articles:</p>
+{% for post in posts %}
+<div class="entry">
+    id:{{ post.pid }}
+    fourm id:{{ post.fid }}
+    post id:{{ post.tid }}
+    is first post:{{ post.first }}<br>
+    post author: {{ post.authorid }} - {{ post.author }}<br>
+    post subject: {{ post.subject|safe }}<br>
+    post message: {{ post.message|safe }}<br>
+    post datetime:{{ post.datetline }}<br>
+    post useip: {{ post.useip }}
+    has attachment: {{ post.attachment }}<br>
+</div>
+{% endfor %}
+
+{% endif %}
+
+<!-- Pagination --!>
+{% for page in pages %}
+    {% if page.num == page_cur.num %}
+        <span class="pl_c">{{ page.num }}</span>
+    {% else %}
+        <a href="/?{{ page_para }}&start={{ page.start }}" class="pl">{{ page.num }}</a>
+    {% endif %}
+{% endfor %}
+

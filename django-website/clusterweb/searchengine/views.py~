@@ -1,0 +1,111 @@
+# -*- coding=utf-8 -*-
+# Create your views here.
+from django.shortcuts import render_to_response
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+# from project.application.web_search....
+from clusterweb.searchengine.web_search import google
+import sphinxapi as sph
+
+def sph_search(query, index_in="*"):
+    q = query
+    index = index_in
+    mode = SPH_MATCH_ALL
+    host = 'localhost'
+    port = 9312
+    filtercol = 'group_id'
+    filtervals = []
+    sortby = ''
+    groupby = ''
+    groupsort = '@group desc'
+    limit = 0
+    # Start sphinx
+    cl = sph.SphinxClient()
+    cl.SetServer ( host, port )
+    cl.SetWeights ( [100, 1] )
+    cl.SetMatchMode ( mode )
+    if filtervals:
+    	cl.SetFilter ( filtercol, filtervals )
+    if groupby:
+    	cl.SetGroupBy ( groupby, SPH_GROUPBY_ATTR, groupsort )
+    if sortby:
+    	cl.SetSortMode ( SPH_SORT_EXTENDED, sortby )
+    if limit:
+    	cl.SetLimits ( 0, limit, max(limit,1000) )
+    res = cl.Query ( q, index )
+
+    # Format the result
+    error = ""
+    warning = ""
+    ret_format = {}
+    if not res:
+        error = 'Query Failed: %s' % cl.GetLastError()
+        return False, error
+
+    if cl.GetLastWarning():
+        warning = 'WARNING: %s' % cl.GetLastWarning()
+
+    ret_format["query"] = q
+    ret_format["total"] = res['total']  # 在内存中处理的记录数
+    ret_format["total_found"] = res['total_found'] # 总共的记录数
+    ret_format["time"] = res['time']    # 耗费的时间
+
+    #print 'Query stats:'
+    if res.has_key('words'):
+        qstatus = {}
+        #for info in res['words']:
+        #print '\t\'%s\' found %d times in %d documents' % (info['word'], info['hits'], info['docs'])
+        ret_format["words"] = res["words"]
+
+    if res.has_key('matches'):
+        matches = []
+        n = 1
+        #print '\nMatches:'
+        for match in res['matches']:
+            #attrsdump = ''
+            attrs_list = []
+            match_each = {}
+            for attr in res['attrs']:
+                attr_map = {}
+                attrname = attr[0]
+                attrtype = attr[1]
+                value = match['attrs'][attrname]
+                if attrtype==SPH_ATTR_TIMESTAMP:
+                    value = time.strftime ( '%Y-%m-%d %H:%M:%S', time.localtime(value) )
+                #attrsdump = '%s, %s=%s' % ( attrsdump, attrname, value )
+                attr_map["name"] = attrname
+                arrr_map["value"] = value
+                attrs_list.append(attr_map)
+
+            #print '%d. doc_id=%s, weight=%d%s' % (n, match['id'], match['weight'], attrsdump)
+            match_each["id"] = n
+            match_each["doc_id"] = match["id"]
+            match_each["weight"] = match["weight"]
+            match_each["attrs"] = attrs_list
+            matches.append(match_each)
+            n += 1
+        ret_format["matches"] = matches
+
+    ret_format["error"] = error
+    ret_format["warning"] = warning
+    return True, ret_format
+
+def search(request):
+
+    if request.POST:
+        #print request.POST['term']
+        #return render_to_response('search.html', {'result': google(request.POST['term'], 10)})
+        template = "search.html"
+        query = request.POST["term"]
+        import pdb; pdb.set_trace()
+        status, res = sph_search(query)
+        if not status:
+            return render_to_response(template, {"error": res})
+        else:
+            return render_to_response(template, {"res": res}
+
+        #(title, link,  description)
+        #return render_to_response(res_template, res_content)
+        #return HttpResponseRedirect("/")
+#    else:
+#        return render_to_response('search.html')
+

@@ -1,0 +1,115 @@
+linux兼容硬件列表及笔记本usb摄头配置推荐
+
+不考虑操作系统硬件最重要的是南北桥最好的是nvidia的和VIA，其次Intel的，最差是sis的
+相信很多人在刚装linux的时候都选择了(有光盘买，hoho)，下面是redhat兼容硬件列表，大家看一下，或许有些帮助：
+CPUs
+Intel -- Pentium, Pentium Pro, Pentium II, Pentium II Xeon, Pentium III, Pentium III Xeon, Pentium IV, Pentium IV Xeon, Celeron AMD - K6, K6 - 2, K6-3, Athlon, Duron, Athlon XP, Athlon MP Cyrix - MII VIA - Cyrix MIII, C3
+
+Video cards
+3DFX -- Banshee, Voodoo3, Voodoo5; ATI -- Radeon Mobility M6, M7; Radeon 7000, 7500, 8500, 9000, 9700 (2D only), 9800 (2D only); Rage 128, Rage 128 Mobility M3, M4; Rage 128 Pro, Rage 128 Pro Ultra, most Mach64-compliant cards; Intel -- i740, i810, i815, i830, i845G, i845GL Matrox -- Millenium, Millenium II, Mystique/220, G200, G400, G450, G550, NeoMagic -- 256AV, 256XL+, 256ZX, 128XD, 128, 128V, 128ZV, 128ZV+, NVIDIA (2D only) -- TNT, TNT2, GeForce 256, GeForce2 GTS, GeForce2 Go, GeForce2 MX, GeForce3, GeForce4, S3 -- Savage, SuperSavage, ViRGE, Trio64
+
+SCSI controllers 
+Adaptec -- 200x, 21xx, 22xx, 27xx, 28xx, 29xx, 32xx, 34xx, 39xx, 54xx Advansys -- 940 (Ultra/Wide); AMI -- MegaRAID Express 2000 (466 series) Dell -- PowerEdge RAID series; IBM (Buslogic/Mylex) -- Flashpoint, MultiMaster, DAC-960; Intel -- Vortex/GDT series; LSI (Symbios) -- 53C875, 53C985, 53C1030; QLogic -- QLA1280/2200/2300/12160
+
+IDE controllers
+ATA-133, ATA-33 -- most controllers.
+ATA-66 (not RAID) -- HighPoint 366/368, Intel 82801AB ICH0 (440BX), Promise PDC20262, PDC2027x, PDC20265/7 VIA 82c596B/686A.
+ATA-100 (no RAID) -- Highpoint 370, Intel 82801BA/82801DB ICH2/ICH4 (i8xx series), VIA 82c686B, nVidia nForce/nForce2; ATA RAID -- 3ware Escalade 3W -- 5xxx/6xxx/7xxx, Adaptec 2400A. 
+
+Network cards
+3COM -- 3C905/B/C; D-Link -- DFE-530/+; Realtek -- RTL8029, RTL8139, RTL8139C+, RTL8169; IntelÑEtherExpress Pro 100/1000; Netgear -- FA310TX, FA311TX; Linksys -- LNE100TX; Silicon Integrated Systems -- SiS900; Intel -- DE4x5/Tulip series; GigE -- Broadcom Tigon3, Intel e1000, NatSemi NS83820, Realtek RTL8169 VIA - Rhine
+
+
+Modems
+100% Hayes-compatible internal and external serial modems with hardware UART. NOTE: WinModems, host-based, HCF-, HSP-, HSF-, controllerless, host-controlled, and soft modems are NOT supported.
+
+Sound cards
+C-Media -- CM8338/CM8738; Creative Labs -- SoundBlaster 128 PCI, SoundBlaster Live!, SoundBlaster Live! Audigy; Crystal -- CS428X/CS46XX; ESS -- Maestro, Maestro2, Maestro3, Solo; Ensoniq -- AudioPCI ES1370, ES1371; Intel -- ICH, ICH2, ICH3, ICH4; Yamaha -- YMF724, 74x, 754; VIA -- VIA82c686, VIA8233, VIA8235
+
+usb摄头
+ov511芯片
+
+网眼v2000
+网眼pc350
+网眼 v3000
+Hedy(七喜)yoyo 摄像头
+
+笔记本
+博宇H300
+紫光V610D
+清华紫光V500
+清华紫光S200X 
+方正 卓越 H100 
+博宇H208 
+方正佳和H100 
+TCL D1100 
+腾龙X31
+
+部件   驱动来源
+显卡   厂家linux驱动(3 D 支持)
+IDE    内核/ 厂家linux驱动
+APCI   内核linux驱动
+网卡    内核/ 厂家linux驱动
+声卡    厂家linux驱动
+cpu    内核linux驱动
+usb   内核/ 厂家linux驱动
+红外  内核linux驱动
+测试linux版本红帽9
+
+主板：
+友通资讯PT880/K8M800主板
+华擎939NF4G-SATA2
+微星 K8M800主板
+DFI K8M800-MLV主板
+微星PT880 Neo-LSR
+IDE    内核/ 厂家linux驱动
+APCI   内核linux驱动
+网卡    内核/ 厂家linux驱动
+声卡    厂家linux驱动
+cpu    内核linux驱动
+usb   内核/ 厂家linux驱动
+红外  内核linux驱动
+SATA 厂家linux驱动
+测试linux版本红帽9
+
+硕泰克SL-PT880E-RL
+IDE    内核/ 厂家linux驱动
+APCI   内核linux驱动
+网卡    内核/ 厂家linux驱动
+声卡    厂家linux驱动
+cpu    内核linux驱动
+usb   内核/ 厂家linux驱动
+红外  内核linux驱动
+SATA 厂家linux驱动
+测试linux版本红帽9
+
+华擎K7VM4主板
+显卡   厂家linux驱动(3 D 支持)
+IDE    内核/ 厂家linux驱动
+APCI   内核linux驱动
+网卡    内核/ 厂家linux驱动
+声卡    厂家linux驱动
+cpu    内核linux驱动
+usb   内核/ 厂家linux驱动
+红外  内核linux驱动
+__________________________________
+现有提供厂家支持的IC(看主板南北桥)
+nforce2            nforce3
+nvidia的全套产品
+CLE266        VT8622/VT8623        
+KM400                  VT8378        
+PM880                   KM800                  
+K8M800        KN800         
+PN800           CN400
+PLE133T        VT8601T        
+PLE133        VT8601A         
+KLE133        VT8361
+PL133/PM133        VT8604/VT8605        
+KL133/KM133        VT8364/VT8365         
+KL133A/KM133A        VT8364A/VT8365A         
+PN133/PN133T        VT8603/VT8606        
+KN133        VT8362
+P4M266        VT8751        
+PN266T        VT8613         
+KM266        VT8375         
+KN266 VT8372
